@@ -7,12 +7,14 @@ export interface AUTH_TOKEN {
 export const authToken = async (
   clientId: string,
   clientSecrete: string,
-  url: string
+  baseUrl: string
 ): Promise<AUTH_TOKEN> => {
+  const url = `${baseUrl}auth_token`;
   const res = await axios
     .post(url, {
       email: clientId,
       password: clientSecrete,
+      returnSecureToken: true,
     })
     .then((res) => res.data);
 
